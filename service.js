@@ -24,7 +24,12 @@ io.sockets.on("connection",function (socket) {
 
     //talk of room(channel)
     socket.on("broadcastRoom",function (data) {
-        io.sockets.in(socket.userRoom).emit("talkRoom","["+socket.userName+"]:"+data);;
+        var backData={
+            name:socket.userName,
+            talk:data
+        };
+        //io.sockets.in(socket.userRoom).emit("talkRoom","["+socket.userName+"]:"+data);
+        io.sockets.in(socket.userRoom).emit("talkRoom",backData);
     });
 
     //talk of everyone(world)
